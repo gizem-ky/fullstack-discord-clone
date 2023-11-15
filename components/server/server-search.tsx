@@ -4,7 +4,14 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-
+import { 
+  CommandDialog, 
+  CommandEmpty, 
+  CommandGroup, 
+  CommandInput,
+  CommandItem,
+  CommandList
+} from "@/components/ui/command";
 
 interface ServerSearchProps {
   data: {
@@ -67,7 +74,30 @@ export const ServerSearch = ({
           <span className="text-xs">⌘</span>K
         </kbd>
       </button>
-      
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Search all channels and members" />
+        <CommandList>
+          <CommandEmpty>
+            No Results found
+          </CommandEmpty>
+          {data.map(({ label, type, data }) => {
+            if (!data?.length) return null;
+
+            return (
+              <CommandGroup key={label} heading={label}>
+                  {data?.map(({ id, icon, name }) => {
+                    return (
+                      <CommandItem key={id} onSelect={() => onClick({ id, type })}>
+                        {icon}
+                        <span>{name}</span>
+                      </CommandItem>
+                    )
+                  })}
+              </CommandGroup>
+            )
+          })}
+        </CommandList>
+      </CommandDialog>
     </>
   )
 }

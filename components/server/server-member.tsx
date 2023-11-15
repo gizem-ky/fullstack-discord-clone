@@ -5,6 +5,7 @@ import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { UserAvatar } from "@/components/user-avatar";
 
 interface ServerMemberProps {
   member: Member & { profile: Profile };
@@ -38,6 +39,10 @@ export const ServerMember = ({
         params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700"
       )}
     >
+      <UserAvatar 
+        src={member.profile.imageUrl}
+        className="h-8 w-8 md:h-8 md:w-8"
+      />
       <p
         className={cn(
           "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
@@ -50,5 +55,3 @@ export const ServerMember = ({
     </button>
   )
 }
-
-

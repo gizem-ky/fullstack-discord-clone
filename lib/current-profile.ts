@@ -1,9 +1,9 @@
-import { NextApiRequest  } from "next";
-import { getAuth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
+
 import { db } from "@/lib/db";
 
-export const currentProfile = async (req: NextApiRequest) => {
-  const { userId } = getAuth(req);
+export const currentProfile = async () => {
+  const { userId } = auth();
 
   if (!userId) {
     return null;

@@ -6,6 +6,7 @@ import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/use-chat-query";
+import { useChatSocket } from "@/hooks/use-chat-socket";
 
 import { ChatWelcome } from "./chat-welcome";
 import { ChatItem } from "./chat-item";
@@ -60,6 +61,7 @@ export const ChatMessages = ({
     paramKey,
     paramValue,
   });
+  useChatSocket({ queryKey, addKey, updateKey });
 
   if (status === "error") {
     return (
